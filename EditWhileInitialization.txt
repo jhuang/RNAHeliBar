@@ -1,0 +1,67 @@
+## Makefile ##
+VRNADIR  = ${HOME}/Downloads/ViennaRNA-1.8.5
+
+
+## Util.cpp ##
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <algorithm>
+
+
+## Node.cpp ##
+#include <cstring>
+
+
+## findpath.c ##
+nothing is changed
+
+
+## MorganHiggs.h ## first --> firstc; second --> secondc
+
+ddOutside(std::pair<int,int> bp,char firstc,char secondc);
+
+  void AddInside(std::pair<int,int> bp,char firstc,char secondc);
+
+  void AddOutside(int first,int second,char firstc,char secondc);
+
+  void AddInside(int first,int second,char firstc,char secondc);
+
+
+ static  bool IsGCPair(char firstc,char secondc);
+
+
+
+
+## ${HOME}/Downloads/ViennaRNA-1.8.5/H/pair_mat.h ##
+#include <string.h>
+
+
+## get rid of the following 2 rows in MorganHiggs.cpp ##
+##ifdef _TEST_MORGANHIGGS_
+##endif
+
+
+#################################### compilation commands  ##########################################
+jhuang@swimming-pool:~/Downloads/kinwalker> make
+gcc -c -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H options.c -o options.o
+gcc -c -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H findpath.c -o findpath.o
+findpath.c:18:13: warning: ‘rcsid’ defined but not used
+findpath.c: In function ‘find_saddle’:
+findpath.c:176:7: warning: ‘dir’ may be used uninitialized in this function
+g++ -c -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H Energy.cpp -o Energy.o
+g++ -c -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H Node.cpp -o Node.o
+g++ -c -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H Util.cpp -o Util.o
+g++ -c -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H MorganHiggs.cpp -o MorganHiggs.o
+MorganHiggs.cpp: In function ‘std::vector<std::pair<double, std::basic_string<char> > > MorganHiggsStudlaEnergy(std::string, std::string, std::string, double, int, std::string)’:
+MorganHiggs.cpp:1828:8: warning: unused variable ‘debug’
+g++ -c -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H main.cpp -o main.o
+g++ -Wall -ansi -pedantic -O3  -I. -I/home/jhuang/Downloads/ViennaRNA-1.8.5/H -o kinwalker  options.o  findpath.o  Energy.o  Node.o  Util.o  MorganHiggs.o  main.o -L/home/jhuang/Downloads/ViennaRNA-1.8.5/lib -lRNA  -lm -lstdc++
+
+
+## invokation example ##
+./main --transcribed=50 --transcription_rate=80 --barrier_heuristic=S --interrupt --window_size=100 < hok.seq > hok.out\fP
+./main --barrier_heuristic=M  < example_1.seq > example_1.out
+
+
+
